@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import { Box, Link, Typography } from "@mui/material";
 import { usePathname } from "next/navigation";
-// import { Box } from "@mui/material";
 
 const SideBarNavLink = ({
   label,
