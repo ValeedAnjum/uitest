@@ -1,0 +1,26 @@
+.main_dashboard_conatiner {
+    display: flex;
+    border: 1px solid red;
+    height: 100vh;
+}
+
+.left_sidebar  {
+    width: 248px;
+    border: 1px solid black;
+    padding: 30px 24px;
+
+}
+
+.rigth_container {
+    flex: 1;
+    border: 1px solid blue;
+}
+
+.top_bar {
+    height: 78px;
+    border:1px solid black;
+}
+
+.top_bar_content_container { 
+
+}
