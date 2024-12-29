@@ -361,8 +361,7 @@ const CarConatiner = ({ currentCar }: any) => {
   );
 };
 export const AssetView = () => {
-  const { availableCars, isLoaidng, currentCar, handleCurrentCarUpdate } =
-    UseAsset();
+  const { availableCars, currentCar, handleCurrentCarUpdate } = UseAsset();
 
   return (
     <>
@@ -381,7 +380,6 @@ export const AssetView = () => {
           display: { lg: "none", xl: "block" },
         }}
       >
-        <IsFetching isFetching={isLoaidng} />
         <Typography sx={{ fontSize: "30px", fontWeight: "bold" }}>
           Assets
         </Typography>

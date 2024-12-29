@@ -12,7 +12,6 @@ export const UseAsset = () => {
     topSpeed: "230",
     image: "/assets/images/audi.svg",
   });
-  const [isLoaidng, setIsLoaidng] = useState(false);
 
   const handleCurrentCarUpdate = async (index: any) => {
     try {
@@ -35,7 +34,6 @@ export const UseAsset = () => {
   };
   return {
     availableCars,
-    isLoaidng,
     currentCar,
     handleCurrentCarUpdate,
   };
