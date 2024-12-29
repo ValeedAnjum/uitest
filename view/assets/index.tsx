@@ -5,6 +5,7 @@ import Image from "next/image";
 import AvailableCars from "./available-cars/available-cars";
 import { UseAsset } from "./use-asset";
 import { IsFetching } from "@/atom/is-fetching/is-fecthing";
+import { useEffect, useState } from "react";
 
 const CarInfoCard = ({
   primary,
@@ -39,12 +40,7 @@ const Line = () => {
   );
 };
 const CardContentContainer = ({ currentCar }: any) => {
-  const {
-    fuelUsage = "---",
-    Driver = "---",
-    Price = "---",
-    topSpeed = "---",
-  } = currentCar;
+  const { fuelUsage, Driver, Price, topSpeed } = currentCar;
   console.log(currentCar);
   return (
     <Grid container flexDirection="column" sx={{ p: "2rem 1rem" }}>
@@ -82,7 +78,17 @@ const CardContentContainer = ({ currentCar }: any) => {
   );
 };
 
-const CarNameAndImage = () => {
+const CarNameAndImage = ({ name, year, image }: any) => {
+  const [loading, setLoading] = useState(true);
+
+  const handleImageLoad = () => {
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    setLoading(true);
+  }, [image]);
+
   return (
     <Grid
       item
@@ -91,10 +97,12 @@ const CarNameAndImage = () => {
         borderRadius: "0.875rem",
         padding: "0 2rem",
         maxHeight: "400px",
+        position: "relative",
       }}
     >
+      <IsFetching isFetching={loading} />
       <Typography sx={{ fontSize: "1.9rem", fontWeight: "bold" }}>
-        2022 Mercedes Benz
+        {year} {name}
       </Typography>
       <Box
         sx={{
@@ -103,7 +111,13 @@ const CarNameAndImage = () => {
           zIndex: 1,
         }}
       >
-        <Image src="/assets/images/audi.svg" fill alt="Logo" quality={100} />
+        <Image
+          src={image}
+          fill
+          alt="Logo"
+          quality={100}
+          onLoad={handleImageLoad}
+        />
       </Box>
       <Box
         sx={{
@@ -346,6 +360,7 @@ const CarConatiner = ({ currentCar }: any) => {
 export const AssetView = () => {
   const { availableCars, isLoaidng, currentCar, handleCurrentCarUpdate } =
     UseAsset();
+
   return (
     <Grid sx={{ height: "calc(100vh - 98px)", position: "relative" }}>
       <IsFetching isFetching={isLoaidng} />
@@ -367,7 +382,11 @@ export const AssetView = () => {
           container
           flexDirection="column"
         >
-          <CarNameAndImage />
+          <CarNameAndImage
+            name={currentCar?.modal ? `${currentCar?.modal}` : "----"}
+            year={currentCar?.Year ? `${currentCar?.Year}` : "----"}
+            image={currentCar?.image ? `${currentCar?.image}` : "----"}
+          />
           <Grid
             item
             sx={

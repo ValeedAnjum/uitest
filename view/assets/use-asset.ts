@@ -10,8 +10,7 @@ export const UseAsset = () => {
     Driver: "40000",
     Price: "3,00,290.00",
     topSpeed: "230",
-    image:
-      "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "/assets/images/audi.svg",
   });
   const [isLoaidng, setIsLoaidng] = useState(false);
 
@@ -25,8 +24,7 @@ export const UseAsset = () => {
           Driver: "40000",
           Price: "3,00,290.00",
           topSpeed: "230",
-          image:
-            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          image: "/assets/images/audi.svg",
         });
         return;
       }
