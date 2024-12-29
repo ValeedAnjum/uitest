@@ -77,17 +77,6 @@ const CardContentContainer = ({ currentCar }: any) => {
 };
 
 const CarNameAndImage = ({ name, year, image }: any) => {
-  const [loading, setLoading] = useState(true);
-
-  const handleImageLoad = () => {
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    if (image === "/assets/images/audi.svg") return;
-    setLoading(true);
-  }, [image]);
-
   return (
     <Grid
       item
@@ -99,7 +88,6 @@ const CarNameAndImage = ({ name, year, image }: any) => {
         position: "relative",
       }}
     >
-      <IsFetching isFetching={loading} />
       <Typography sx={{ fontSize: "1.9rem", fontWeight: "bold" }}>
         {year} {name}
       </Typography>
@@ -110,13 +98,7 @@ const CarNameAndImage = ({ name, year, image }: any) => {
           zIndex: 1,
         }}
       >
-        <Image
-          src={image}
-          fill
-          alt="Logo"
-          quality={100}
-          onLoad={handleImageLoad}
-        />
+        <Image src={image} fill alt="Logo" quality={100} />
       </Box>
       <Box
         sx={{
@@ -334,7 +316,8 @@ const CarConatiner = ({ currentCar }: any) => {
       item
       sm={3}
       sx={{
-        height: "calc(100vh - 190px)",
+        // height: "calc(100vh - 190px)",
+        height: "calc(100vh - 310px)",
         minWidth: "361px",
         backgroundColor: "#438FFE",
         borderRadius: "14px",
@@ -343,6 +326,22 @@ const CarConatiner = ({ currentCar }: any) => {
     >
       <CardContentContainer currentCar={currentCar} />
       <Box
+        sx={{
+          position: "absolute",
+          bottom: "-20%",
+          left: 0,
+          width: "100%",
+          height: "80%",
+        }}
+      >
+        <Image
+          src="/assets/images/vertical-car.svg"
+          fill
+          alt="Logo"
+          quality={100}
+        />
+      </Box>
+      {/* <Box
         sx={{
           position: "absolute",
           height: "500px",
@@ -356,7 +355,7 @@ const CarConatiner = ({ currentCar }: any) => {
           alt="Logo"
           quality={100}
         />
-      </Box>
+      </Box> */}
     </Grid>
   );
 };
@@ -378,6 +377,7 @@ export const AssetView = () => {
           height: "calc(100vh - 98px)",
           position: "relative",
           display: { lg: "none", xl: "block" },
+          overflow: "hidden",
         }}
       >
         <Typography sx={{ fontSize: "30px", fontWeight: "bold" }}>
