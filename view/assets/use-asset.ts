@@ -8,7 +8,7 @@ export const UseAsset = () => {
     Year: "2022",
     fuelUsage: "2903.39",
     Driver: "40000",
-    Price: "3,00,290.00",
+    Price: "3,00",
     topSpeed: "230",
     image: "/assets/images/audi.svg",
   });
