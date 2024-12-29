@@ -30,6 +30,7 @@ const Line = () => {
   return (
     <Box
       sx={{
+        border: "1px solid #579BFF",
         position: "absolute",
         top: "0",
         left: "-2rem",
@@ -95,7 +96,6 @@ const CarNameAndImage = ({ name, year, image }: any) => {
         backgroundColor: "white",
         borderRadius: "0.875rem",
         padding: "0 2rem",
-        maxHeight: "400px",
         position: "relative",
       }}
     >
@@ -127,6 +127,75 @@ const CarNameAndImage = ({ name, year, image }: any) => {
         }}
       >
         <Image src="/assets/images/circles.svg" fill alt="Logo" quality={100} />
+      </Box>
+    </Grid>
+  );
+};
+
+const CarNameAndImage2 = ({ name, year, image }: any) => {
+  const [loading, setLoading] = useState(true);
+
+  const handleImageLoad = () => {
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (image === "/assets/images/audi.svg") return;
+    setLoading(true);
+  }, [image]);
+
+  return (
+    <Grid
+      item
+      sx={{
+        backgroundColor: "white",
+        borderRadius: "0.875rem",
+        padding: "0 2rem",
+        position: "relative",
+        height: "100%",
+      }}
+    >
+      <IsFetching isFetching={loading} />
+      <Typography sx={{ fontSize: "1.9rem", fontWeight: "bold" }}>
+        {year} {name}
+      </Typography>
+      <Box sx={{ width: "100%", border: "2px solid red", textAlign: "center" }}>
+        <Box
+          sx={{
+            width: "500px",
+            border: "1px solid red",
+            height: "200px",
+            position: "relative",
+            display: "inline-block",
+          }}
+        >
+          <Image
+            src={image}
+            fill
+            alt="Logo"
+            quality={100}
+            onLoad={handleImageLoad}
+            style={{ zIndex: 1 }}
+          />
+          <Box
+            sx={{
+              border: "1px solid black",
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              top: "80%",
+              left: "50%",
+              transform: "translate(-50%,-50%)",
+            }}
+          >
+            <Image
+              src="/assets/images/circles.svg"
+              fill
+              alt="Logo"
+              quality={100}
+            />
+          </Box>
+        </Box>
       </Box>
     </Grid>
   );
@@ -330,24 +399,22 @@ const NotesCards = () => {
 };
 const CarConatiner = ({ currentCar }: any) => {
   return (
-    <Grid
-      item
-      sm={3}
+    <Box
       sx={{
-        height: "calc(100vh - 190px)",
-        minWidth: "361px",
-        backgroundColor: "#438FFE",
-        borderRadius: "14px",
+        border: "1px solid blue",
+        height: "80%",
         position: "relative",
+        backgroundColor: "#438FFE",
       }}
     >
       <CardContentContainer currentCar={currentCar} />
       <Box
         sx={{
           position: "absolute",
-          height: "500px",
-          bottom: "-80px",
+          height: "80%",
+          border: "1px solid black",
           width: "100%",
+          bottom: "-20%",
         }}
       >
         <Image
@@ -357,7 +424,7 @@ const CarConatiner = ({ currentCar }: any) => {
           quality={100}
         />
       </Box>
-    </Grid>
+    </Box>
   );
 };
 export const AssetView = () => {
@@ -365,86 +432,69 @@ export const AssetView = () => {
     UseAsset();
 
   return (
-    <>
-      <Typography
-        sx={{
-          height: "calc(100vh - 98px)",
-          display: { lg: "block", xl: "none" },
-        }}
-      >
-        Please View It Screen larger than 1536Px width
-      </Typography>
-      <Grid
-        sx={{
-          height: "calc(100vh - 98px)",
-          position: "relative",
-          display: { lg: "none", xl: "block" },
-        }}
-      >
+    <Grid
+      sx={{
+        height: "calc(100vh - 98px)",
+        position: "relative",
+        border: "1px solid black",
+      }}
+      container
+      flexDirection="column"
+    >
+      <Grid item sx={{ border: "1px solid red" }}>
+        {/* is Fetching and typo */}
         <IsFetching isFetching={isLoaidng} />
         <Typography sx={{ fontSize: "30px", fontWeight: "bold" }}>
           Assets
         </Typography>
-        <Grid container>
-          {/* car container */}
-          <CarConatiner currentCar={currentCar} />
-          {/* car info */}
+      </Grid>
+      <Grid
+        item
+        sx={{ border: "1px solid black", flexGrow: 1, flexWrap: "nowrap" }}
+        container
+        gap={2}
+      >
+        {/* Left Side */}
+        <Grid
+          item
+          container
+          sx={{ border: "1px solid red", height: "100%", position: "relative" }}
+          md={3}
+          flexDirection="column"
+        >
+          <Grid item sx={{ border: "1px solid green", flexGrow: 1 }}>
+            <CarConatiner currentCar={currentCar} />
+          </Grid>
+        </Grid>
+        {/* right */}
+        <Grid
+          item
+          container
+          sx={{
+            border: "1px solid navy",
+            height: "100%",
+            position: "relative",
+          }}
+          md={9}
+          flexDirection="column"
+        >
           <Grid
             item
-            md={6}
-            sm={12}
-            xs={12}
             sx={{
-              rowGap: "1rem",
-              p: "0 2rem",
+              height: "50%",
             }}
-            container
-            flexDirection="column"
           >
-            <CarNameAndImage
+            <CarNameAndImage2
               name={currentCar?.modal ? `${currentCar?.modal}` : "----"}
               year={currentCar?.Year ? `${currentCar?.Year}` : "----"}
               image={currentCar?.image ? `${currentCar?.image}` : "----"}
             />
-            <Grid
-              item
-              container
-              justifyContent="space-between"
-              gap={2}
-              flexWrap="nowrap"
-            >
-              <Grid
-                item
-                sm={6}
-                sx={{
-                  backgroundColor: "white",
-                  p: "1.25rem ",
-                  borderRadius: "14px",
-                }}
-                container
-                direction="column"
-              >
-                {/* Notes Cards  */}
-                <NotesCards />
-              </Grid>
-              <Grid
-                item
-                sm={6}
-                sx={{
-                  backgroundColor: "white",
-                  p: "1.25rem ",
-                  borderRadius: "14px",
-                }}
-              >
-                <AvailableCars
-                  availableCars={availableCars}
-                  handleCurrentCarUpdate={handleCurrentCarUpdate}
-                />
-              </Grid>
-            </Grid>
+          </Grid>
+          <Grid item sx={{ height: "50%" }}>
+            2
           </Grid>
         </Grid>
       </Grid>
-    </>
+    </Grid>
   );
 };

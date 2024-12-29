@@ -30,6 +30,7 @@ const Line = () => {
   return (
     <Box
       sx={{
+        border: "1px solid #579BFF",
         position: "absolute",
         top: "0",
         left: "-2rem",
@@ -330,24 +331,22 @@ const NotesCards = () => {
 };
 const CarConatiner = ({ currentCar }: any) => {
   return (
-    <Grid
-      item
-      sm={3}
+    <Box
       sx={{
-        height: "calc(100vh - 190px)",
-        minWidth: "361px",
-        backgroundColor: "#438FFE",
-        borderRadius: "14px",
+        border: "1px solid blue",
+        height: "80%",
         position: "relative",
+        backgroundColor: "#438FFE",
       }}
     >
       <CardContentContainer currentCar={currentCar} />
       <Box
         sx={{
           position: "absolute",
-          height: "500px",
-          bottom: "-80px",
+          height: "80%",
+          border: "1px solid black",
           width: "100%",
+          bottom: "-20%",
         }}
       >
         <Image
@@ -357,7 +356,7 @@ const CarConatiner = ({ currentCar }: any) => {
           quality={100}
         />
       </Box>
-    </Grid>
+    </Box>
   );
 };
 export const AssetView = () => {
@@ -365,86 +364,32 @@ export const AssetView = () => {
     UseAsset();
 
   return (
-    <>
-      <Typography
-        sx={{
-          height: "calc(100vh - 98px)",
-          display: { lg: "block", xl: "none" },
-        }}
-      >
-        Please View It Screen larger than 1536Px width
-      </Typography>
+    <Grid
+      sx={{
+        height: "calc(100vh - 98px)",
+        position: "relative",
+        border: "1px solid black",
+      }}
+    >
+      {/* Left Side */}
       <Grid
-        sx={{
-          height: "calc(100vh - 98px)",
-          position: "relative",
-          display: { lg: "none", xl: "block" },
-        }}
+        item
+        container
+        sx={{ border: "1px solid red", height: "100%", position: "relative" }}
+        md={3}
+        flexDirection="column"
       >
-        <IsFetching isFetching={isLoaidng} />
-        <Typography sx={{ fontSize: "30px", fontWeight: "bold" }}>
-          Assets
-        </Typography>
-        <Grid container>
-          {/* car container */}
+        <Grid item>
+          {/* is Fetching and typo */}
+          <IsFetching isFetching={isLoaidng} />
+          <Typography sx={{ fontSize: "30px", fontWeight: "bold" }}>
+            Assets
+          </Typography>
+        </Grid>
+        <Grid item sx={{ border: "1px solid green", flexGrow: 1 }}>
           <CarConatiner currentCar={currentCar} />
-          {/* car info */}
-          <Grid
-            item
-            md={6}
-            sm={12}
-            xs={12}
-            sx={{
-              rowGap: "1rem",
-              p: "0 2rem",
-            }}
-            container
-            flexDirection="column"
-          >
-            <CarNameAndImage
-              name={currentCar?.modal ? `${currentCar?.modal}` : "----"}
-              year={currentCar?.Year ? `${currentCar?.Year}` : "----"}
-              image={currentCar?.image ? `${currentCar?.image}` : "----"}
-            />
-            <Grid
-              item
-              container
-              justifyContent="space-between"
-              gap={2}
-              flexWrap="nowrap"
-            >
-              <Grid
-                item
-                sm={6}
-                sx={{
-                  backgroundColor: "white",
-                  p: "1.25rem ",
-                  borderRadius: "14px",
-                }}
-                container
-                direction="column"
-              >
-                {/* Notes Cards  */}
-                <NotesCards />
-              </Grid>
-              <Grid
-                item
-                sm={6}
-                sx={{
-                  backgroundColor: "white",
-                  p: "1.25rem ",
-                  borderRadius: "14px",
-                }}
-              >
-                <AvailableCars
-                  availableCars={availableCars}
-                  handleCurrentCarUpdate={handleCurrentCarUpdate}
-                />
-              </Grid>
-            </Grid>
-          </Grid>
         </Grid>
       </Grid>
-    </>
+    </Grid>
   );
 };
