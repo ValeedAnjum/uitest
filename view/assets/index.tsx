@@ -86,6 +86,7 @@ const CarNameAndImage = ({ name, year, image }: any) => {
   };
 
   useEffect(() => {
+    if (image === "/assets/images/audi.svg") return;
     setLoading(true);
   }, [image]);
 
@@ -335,16 +336,21 @@ const CarConatiner = ({ currentCar }: any) => {
       item
       sm={3}
       sx={{
-        height: "674px",
+        height: "calc(100vh - 190px)",
+        minWidth: "361px",
         backgroundColor: "#438FFE",
         borderRadius: "14px",
+        position: "relative",
       }}
     >
       <CardContentContainer currentCar={currentCar} />
       <Box
         sx={{
-          position: "relative",
-          height: "90%",
+          position: "absolute",
+          border: "1px solid red",
+          height: "500px",
+          bottom: "-80px",
+          width: "100%",
         }}
       >
         <Image
@@ -362,7 +368,13 @@ export const AssetView = () => {
     UseAsset();
 
   return (
-    <Grid sx={{ height: "calc(100vh - 98px)", position: "relative" }}>
+    <Grid
+      sx={{
+        height: "calc(100vh - 98px)",
+        position: "relative",
+        border: "1px solid red",
+      }}
+    >
       <IsFetching isFetching={isLoaidng} />
       <Typography sx={{ fontSize: "30px", fontWeight: "bold" }}>
         Assets
@@ -373,7 +385,9 @@ export const AssetView = () => {
         {/* car info */}
         <Grid
           item
-          sm={6}
+          md={6}
+          sm={12}
+          xs={12}
           sx={{
             // border: "1px solid black",
             rowGap: "1rem",
